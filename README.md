@@ -23,7 +23,7 @@ To get started with StanleyOS, follow these simple steps:
 
 ### Prerequisites
 
-- A 16-bit x86 environment (bare-metal or emulator).
+- A x64 environment (bare-metal or emulator).
 - An emulator like **QEMU** or **Bochs**.
 - The **StanleyOS** disk image file.
 
