@@ -6,6 +6,9 @@ section .text
 
 _start:
 
+    mov bx, [0x1000]
+    xor [0x1000]
+
     mov ax, 0B800
     mov es, ax
 
@@ -21,4 +24,4 @@ _start:
     loop clear
 
 
-    jmp 0x1000:0x0000
+    jmp bx

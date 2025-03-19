@@ -8,6 +8,10 @@ section .text
     global _start
 
 _start:
+    mov bx, 0x3000
+    mov [0x1000], bx
+    mov dx, Test
+    mov [0x2000], dx
     mov di, 0xB8000  
     mov bx, 2000     
 
@@ -32,11 +36,4 @@ print_loop:
     inc si        
     jmp print_loop  
 
-key_press:
-    mov ah, 0x00  
-    int 0x16      
-
-    mov ah, 0x0E  
-    int 0x10      
-
-    jmp _start    
+    
