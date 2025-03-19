@@ -8,43 +8,35 @@ section .text
     global _start
 
 _start:
-
-    ; Set up the address for the VGA text buffer
-    mov di, 0xB800  ; 16-bit address for the VGA buffer
-    mov bx, 2000     ; Number of characters to clear (2000 characters on screen)
-    mov si, message  ; Address of the message string
+    mov di, 0xB8000  
+    mov bx, 2000     
 
 clear_screen: 
-    ; Clear each character on the screen
-    mov byte [di], 0x20     ; Write a space character
-    mov byte [di + 1], 0x07 ; Set the color (light gray text on black background)
+    mov word [di], 0x0720 
+    add di, 2
+    dec bx
+    jnz clear_screen  
 
-    add di, 2   ; Move to the next character slot
-    dec bx      ; Decrease counter
-    jnz clear_screen  ; Continue until 2000 characters are cleared
+    mov di, 0xB8000  
+    mov si, message  
 
 print_loop:
-    mov al, [si]  ; Load the next character from the message
-    cmp al, 0     ; Check for the null terminator
-    je key_press  ; Jump to key press handling if we reach the end of the message
+    mov al, [si]  
+    cmp al, 0     
+    je key_press  
 
-    mov [di], al  ; Write the character to the VGA buffer
-    add di, 2     ; Move to the next character slot
-    mov byte [di-1], 0x07  ; Set the color (light gray on black background)
+    mov [di], al  
+    mov byte [di+1], 0x07  
 
-    inc si        ; Move to the next character in the message
-    jmp print_loop  ; Repeat for the next character
+    add di, 2  
+    inc si        
+    jmp print_loop  
 
 key_press:
-    ; Wait for a key press
-    mov ah, 0x00  ; BIOS function to get key press
-    int 0x16      ; Call BIOS interrupt 0x16 to read key
+    mov ah, 0x00  
+    int 0x16      
 
-    ; Print the key pressed
-    mov ah, 0x0E  ; BIOS function to print character
-    int 0x10      ; Call BIOS interrupt 0x10 to print the character
+    mov ah, 0x0E  
+    int 0x10      
 
-    jmp _start    ; Restart the process after key press
-
-halt:
-    jmp halt      ; Infinite loop to halt the program (not used)
+    jmp _start    

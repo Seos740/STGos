@@ -6,16 +6,19 @@ section .text
 
 _start:
 
+    mov ax, 0B800
+    mov es, ax
+
     clear:
 
-    mov di, 0xB800
-    mov bx, 2000
+    mov di, 0x0000
+    mov cx, 2000
 
-    mov byte [di], 0x20
-    mov byte [di + 1], 0x07
+    mov word [es:di], 0x0720
+
 
     add di, 2
-    dec bx
-    jnz clear
+    loop clear
 
-    jmp 0x1000
+
+    jmp 0x1000:0x0000
