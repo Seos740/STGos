@@ -7,9 +7,10 @@ section .text
 _start:
 
     mov bx, [0x1000]
-    xor [0x1000]
+    mov word [0x1000], 0
 
-    mov ax, 0B800
+
+    mov ax, 0B800h
     mov es, ax
 
     clear:

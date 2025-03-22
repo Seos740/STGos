@@ -10,7 +10,7 @@ section .text
 _start:
     mov bx, 0x3000
     mov [0x1000], bx
-    mov dx, Test
+    mov dx, message
     mov [0x2000], dx
     mov di, 0xB8000  
     mov bx, 2000     
@@ -36,4 +36,8 @@ print_loop:
     inc si        
     jmp print_loop  
 
-    
+key_press:
+    mov ah, 0x00
+    int 0x16
+    hlt
+
