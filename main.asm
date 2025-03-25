@@ -2,7 +2,7 @@
 [org 0x1000]        
 
 section .data
-    message db 'Welcome To StanleyOS! Press a key.', 0
+    message db 'Welcome To StanleyOS!', 0
 
 section .text
     global _start

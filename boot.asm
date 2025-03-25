@@ -9,7 +9,7 @@ start:
     mov sp, 0x7C00       ; Set the stack pointer to the bottom of the loaded bootloader
     
     ; Jump to our program (the main logic)
-    jmp 0x1000           ; Jump to the actual program logic, assuming it's located at 0x1000
+    jmp 0x9000           ; Jump to the actual program logic, assuming it's located at 0x1000
 
 ; Fill the rest of the space up to 510 bytes with zeros (padding)
 times 510 - ($ - $$) db 0   ; This will fill the remaining space with zero bytes
